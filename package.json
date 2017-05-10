@@ -9,6 +9,8 @@
   "author": "Fernando Cagale <fernando.b.cagale@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "seneca": "^3.3.0"
+    "seneca": "^3.3.0",
+    "seneca-entity": "^2.0.0",
+    "seneca-mongo-store": "^1.1.0"
   }
 }
