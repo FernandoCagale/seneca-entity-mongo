@@ -7,6 +7,8 @@ module.exports = function(options) {
   seneca.add({role:'inventory', cmd:'findAll'}, findAll);
   seneca.add({role:'inventory', cmd:'findById'}, findById);
   seneca.add({role:'inventory', cmd:'create'}, create);
+  seneca.add({role:'inventory', cmd:'update'}, update);
+  seneca.add({role:'inventory', cmd:'remove'}, remove);
  
   function findById(args, done) {
      return inventory.load$({id: args.id}, (err, result) => {
@@ -16,20 +18,25 @@ module.exports = function(options) {
     });
   }
 
+  function update(args, done) {
+    return inventory.load$({id: args.id}, (err, result) => {
+       if (err) return done(err);
+       if (!result) return done(null, {msg: 'not found'});
+
+       inventory.name = args.name;
+       return inventory.save$((err, result) => {
+          if(err) return done(err);
+          return done(null, {result: seneca.util.clean(result)});
+        })  
+    });
+  }
+
   function findAll(args, done) {
      return inventory.list$({}, (err, result) => {
        if (err) return done(err);
        if (!result) return done(null, {msg: 'no record'});
-       return done(null, {result: seneca.util.clean(result)});
+       return done(null, {result: result});
     });
-
-    /*
-    fs.readFile('./db.json', { encoding: 'utf8' }, (err, itens) => {
-        const itensAll = JSON.parse(itens);
-        done(null, itensAll);
-    });
-    */
-    
   }
 
   function create(args, done) {
@@ -39,13 +46,19 @@ module.exports = function(options) {
     return inventory.save$((err, result) => {
       if(err) return done(err);
       return done(null, {result: seneca.util.clean(result)});
-    })
+    })  
+  }
 
-    /*
-      fs.writeFile('./db.json', JSON.stringify(itemName, null), (err) => {
-        if(err) return console.error(err);
-        done(null, itemName);
-      });
-    */    
+  function remove(args, done) {
+    const id = args.id;
+    return inventory.load$({id: id}, (err, result) => {
+       if (err) return done(err);
+       if (!result) return done(null, {msg: 'not found'});
+
+       return inventory.remove$({id: id}, (err, result) => {
+          if(err) return done(err);
+          return done(null, {result: true});
+        })  
+    });
   }
 }
