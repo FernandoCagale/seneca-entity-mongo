@@ -1,2 +1,2 @@
-# seneca-example
+# seneca-entity-mongo
 Example
