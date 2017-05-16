@@ -1,5 +1,5 @@
 {
-  "name": "seneca-example",
+  "name": "seneca-entity-mongo",
   "version": "1.0.0",
   "description": "",
   "main": "inventory-service.js",
