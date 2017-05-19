@@ -4,14 +4,13 @@ const mongoStore = require('seneca-mongo-store');
 
 const opts = {
   mongo: {
-    uri: 'mongodb://127.0.0.1:27017/seneca-example',
+    uri: 'mongodb://127.0.0.1:27017/seneca-entity-mongo',
     options: {}
   }
-}
+};
 
 seneca.use(entity);
 seneca.use(mongoStore, opts.mongo);
 seneca.use('./inventory.js');
-
 
 seneca.listen();

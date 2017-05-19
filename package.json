@@ -2,9 +2,9 @@
   "name": "seneca-entity-mongo",
   "version": "1.0.0",
   "description": "",
-  "main": "inventory-service.js",
+  "main": "service.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "linter": "semistandard"
   },
   "author": "Fernando Cagale <fernando.b.cagale@gmail.com>",
   "license": "ISC",
@@ -12,5 +12,8 @@
     "seneca": "^3.3.0",
     "seneca-entity": "^2.0.0",
     "seneca-mongo-store": "^1.1.0"
-  }
+  },
+  "devDependencies": {
+    "semistandard": "^11.0.0"
+  }  
 }
